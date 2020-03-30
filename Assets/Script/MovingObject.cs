@@ -48,10 +48,11 @@ public class MovingObject : MonoBehaviour{
     // Update is called once per frame
     void Update()
     {
+        SendScaleX = vector.x;
 
 
-    animator.SetBool("walking", DoWalk);//walk 애니메이션
-    animator.SetBool("skill3", SendDoSkill3);//스킬3 에니메이션
+        animator.SetBool("walking", DoWalk);//walk 애니메이션
+        animator.SetBool("skill3", SendDoSkill3);//스킬3 에니메이션
 
         //스킬3실행
         if (Input.GetKey(KeyCode.C))

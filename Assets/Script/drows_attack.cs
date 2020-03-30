@@ -19,12 +19,15 @@ public class drows_attack : MonoBehaviour
     {
         BasicRotation = transform.rotation.z;
         OnAtack = false;
-        DoneMaxRotation = false; 
+        DoneMaxRotation = false;
+        CallDrrowsScale();
     }
 
     // Update is called once per frame
     void Update()
     {
+        var DrowsScript = GameObject.Find("drows").GetComponent<MovingObject>();
+        DrowScale = DrowsScript.SendScaleX;
         //드로즈 이동 스크립트에서 변수불러오는함수 실행
         CallDrrowsScale();
 
@@ -41,13 +44,15 @@ public class drows_attack : MonoBehaviour
         if(OnAtack==true)
         {
             attack();
+            print("OnAtack:");
+            print(OnAtack);
             if (DrowScale > 0)
             {
                 RightGoAddRotation();
                 RightBackAddRotation();
             }
 
-            if (DrowScale < 0)
+            else if (DrowScale < 0)
             {
                 LeftGoAddRotation();
                 LeftBackAddRotation();

@@ -168,13 +168,13 @@ Camera:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1
-    height: 1
+    width: 134
+    height: 134
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 218.14346
+  orthographic size: 268.12354
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -431,4 +431,4 @@ MonoBehaviour:
   LeftMaxRotaion: 30
   DoneMaxRotation: 0
   OnAtack: 0
-  DrowScale: 0
+  DrowScale: 1
