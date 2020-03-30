@@ -14,6 +14,10 @@ public class drows_attack : MonoBehaviour
 
     public float DrowScale;//드로즈 스캐일 값 
 
+    public float AttackDelay;//공격속도 변수
+    public bool DoAttackDelay;
+    public float SetAttackDelay;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +25,8 @@ public class drows_attack : MonoBehaviour
         OnAtack = false;
         DoneMaxRotation = false;
         CallDrrowsScale();
+        DoAttackDelay = false;
+        SetAttackDelay = 1;
     }
 
     // Update is called once per frame
@@ -34,10 +40,16 @@ public class drows_attack : MonoBehaviour
         //기본 공격 실행
         if (Input.GetKey(KeyCode.LeftControl))
         {
-            if (OnAtack == false)
+            if (DoAttackDelay == false)
             {
-                OnAtack = true;
+                AttackDelay = SetAttackDelay;
+                if (OnAtack == false)
+                {
+                    OnAtack = true;
+                    DoAttackDelay = true;
+                }
             }
+            
            
         }
         //공격합수 반복
@@ -60,8 +72,30 @@ public class drows_attack : MonoBehaviour
 
         }
 
+        if (DoAttackDelay == true)
+        {
+            AtttackDelayFuc();
+        }
+
     }
 
+    //공격속도 관련 함수
+    void AtttackDelayFuc()
+    {
+        if (DoAttackDelay == true)
+        {
+            AttackDelay -= Time.deltaTime;
+        }
+
+        if(AttackDelay < 0)
+        {
+            AttackDelay = 0;
+            DoAttackDelay = false;
+        }
+    }
+
+
+    //칼 각도 전환 관련 함수
     void attack()
     {
         transform.rotation = Quaternion.Euler(0,0,Rotaion);
