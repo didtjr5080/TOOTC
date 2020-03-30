@@ -15,6 +15,13 @@ public class MovingObject : MonoBehaviour{
     private float scaley;
     private float scalez;
 
+    public float CoolSkill1;//1번 스킬 쿨타임
+    public bool DoSkill1; //스킬1 지속
+    public bool CoolOnSkill1;//스킬1 쿨온
+    public float Skill1SetCool;//스킬1 쿨타임 설정
+    public float OnSkill1Time;//스킬1 지속시간
+    public float SetOnSkill1Time;//스킬1 지속시간설정
+
     private Animator animator;
 
     // Start is called before the first frame update
@@ -24,6 +31,9 @@ public class MovingObject : MonoBehaviour{
         scaley = transform.localScale.y;
         scalez = transform.localScale.z;
 
+        Skill1SetCool = 7;//스킬1 쿨 설정
+        SetOnSkill1Time = 3;
+
         animator = GetComponent<Animator>();
     }
 
@@ -31,16 +41,50 @@ public class MovingObject : MonoBehaviour{
     void Update()
     {
 
-
+        //스킬1실행
         if (Input.GetKey(KeyCode.Q))
         {
-            applyRunSpeed = runSpeed;//뛰는거 적용
+            if (CoolOnSkill1 == false)//스킬1 실행
+            {
+                CoolSkill1 = Skill1SetCool;//스킬 쿨 설정
+                DoSkill1 = true;//스킬 지속 on
+                CoolOnSkill1 = true;//스킬 지속 off
+                OnSkill1Time = SetOnSkill1Time;//스킬 지속시간 설정
+                applyRunSpeed = runSpeed;//뛰는거 적용
+            }
+            
+        }
+
+        //스킬 1 지속 시간 설정
+        if (DoSkill1 == true)
+        {
+            OnSkill1Time -= Time.deltaTime;
         }
         else
         {
+            
             applyRunSpeed = 0;
         }
 
+        if (OnSkill1Time <= 0)
+        {
+            DoSkill1 = false;
+            OnSkill1Time = 0;
+        }
+
+        //스킬1 쿨타임 설정
+        if (CoolOnSkill1 == true)
+        {
+            CoolSkill1 -= Time.deltaTime;
+        }
+
+        if (CoolSkill1 <= 0)
+        {
+            CoolOnSkill1 = false;
+            CoolSkill1 = 0;
+        }
+
+        //이동 부분
         if (Input.GetAxisRaw("Horizontal") !=0 || Input.GetAxisRaw("Vertical") !=0 ){
 
             vector.Set(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), transform.position.z);
