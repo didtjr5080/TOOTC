@@ -15,12 +15,12 @@ public class MovingObject : MonoBehaviour{
     private float scaley;
     private float scalez;
 
-    public float CoolSkill1;//1번 스킬 쿨타임
-    public bool DoSkill1; //스킬1 지속
-    public bool CoolOnSkill1;//스킬1 쿨온
-    public float Skill1SetCool;//스킬1 쿨타임 설정
-    public float OnSkill1Time;//스킬1 지속시간
-    public float SetOnSkill1Time;//스킬1 지속시간설정
+    public float CoolSkill3;//3번 스킬 쿨타임
+    public bool DoSkill3; //스킬3 지속
+    public bool CoolOnSkill3;//스킬3 쿨온
+    public float Skill3SetCool;//스킬3 쿨타임 설정
+    public float OnSkill3Time;//스킬3 지속시간
+    public float SetOnSkill3Time;//스킬3 지속시간설정
 
     private Animator animator;
 
@@ -31,8 +31,8 @@ public class MovingObject : MonoBehaviour{
         scaley = transform.localScale.y;
         scalez = transform.localScale.z;
 
-        Skill1SetCool = 7;//스킬1 쿨 설정
-        SetOnSkill1Time = 3;
+        Skill3SetCool = 7;//스킬3 쿨 설정
+        SetOnSkill3Time = 3;
 
         animator = GetComponent<Animator>();
     }
@@ -41,24 +41,24 @@ public class MovingObject : MonoBehaviour{
     void Update()
     {
 
-        //스킬1실행
-        if (Input.GetKey(KeyCode.Q))
+        //스킬3실행
+        if (Input.GetKey(KeyCode.C))
         {
-            if (CoolOnSkill1 == false)//스킬1 실행
+            if (CoolOnSkill3 == false)//스킬3 실행
             {
-                CoolSkill1 = Skill1SetCool;//스킬 쿨 설정
-                DoSkill1 = true;//스킬 지속 on
-                CoolOnSkill1 = true;//스킬 지속 off
-                OnSkill1Time = SetOnSkill1Time;//스킬 지속시간 설정
+                CoolSkill3 = Skill3SetCool;//스킬3 쿨 설정
+                DoSkill3 = true;//스킬3 지속 on
+                CoolOnSkill3 = true;//스킬3 지속 off
+                OnSkill3Time = SetOnSkill3Time;//스킬3 지속시간 설정
                 applyRunSpeed = runSpeed;//뛰는거 적용
             }
             
         }
 
-        //스킬 1 지속 시간 설정
-        if (DoSkill1 == true)
+        //스킬 3 지속 시간 설정
+        if (DoSkill3 == true)
         {
-            OnSkill1Time -= Time.deltaTime;
+            OnSkill3Time -= Time.deltaTime;
         }
         else
         {
@@ -66,22 +66,22 @@ public class MovingObject : MonoBehaviour{
             applyRunSpeed = 0;
         }
 
-        if (OnSkill1Time <= 0)
+        if (OnSkill3Time <= 0)
         {
-            DoSkill1 = false;
-            OnSkill1Time = 0;
+            DoSkill3 = false;
+            OnSkill3Time = 0;
         }
 
-        //스킬1 쿨타임 설정
-        if (CoolOnSkill1 == true)
+        //스킬3 쿨타임 설정
+        if (CoolOnSkill3 == true)
         {
-            CoolSkill1 -= Time.deltaTime;
+            CoolSkill3 -= Time.deltaTime;
         }
 
-        if (CoolSkill1 <= 0)
+        if (CoolSkill3 <= 0)
         {
-            CoolOnSkill1 = false;
-            CoolSkill1 = 0;
+            CoolOnSkill3 = false;
+            CoolSkill3 = 0;
         }
 
         //이동 부분
