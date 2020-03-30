@@ -22,7 +22,11 @@ public class MovingObject : MonoBehaviour{
     public float OnSkill3Time;//스킬3 지속시간
     public float SetOnSkill3Time;//스킬3 지속시간설정
 
+    public float SendScaleX;//검에 넘겨줄 x값
+
     private Animator animator;
+
+    public bool DoWalk;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +37,8 @@ public class MovingObject : MonoBehaviour{
 
         Skill3SetCool = 7;//스킬3 쿨 설정
         SetOnSkill3Time = 3;
+        DoSkill3 = false;
+        CoolOnSkill3 = false;
 
         animator = GetComponent<Animator>();
     }
@@ -41,20 +47,26 @@ public class MovingObject : MonoBehaviour{
     void Update()
     {
 
+
+
+
         //스킬3실행
         if (Input.GetKey(KeyCode.C))
         {
             TouchOfDevil();
+            TouchOfDevilSpeedSet();
         }
 
         TouchOfDevilCool();//스킬3 쿨타임, 지속시간
 
         //이동 부분
-        if (Input.GetAxisRaw("Horizontal") !=0 || Input.GetAxisRaw("Vertical") !=0 ){
+        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+        {
+            DoWalk = true;
 
             vector.Set(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), transform.position.z);
 
-            animator.SetBool("walking",true);//walk 애니메이션
+            animator.SetBool("walking", DoWalk);//walk 애니메이션
 
             if (vector.x != 0)
             {
@@ -72,12 +84,16 @@ public class MovingObject : MonoBehaviour{
             {
                 transform.Translate(0, vector.y * (speed + applyRunSpeed), 0);//y값 변환
             }
-
         }
+
+
+
+
 
         else
         {
-            animator.SetBool("walking", false);//stand 애니메이션
+            DoWalk = false;
+            animator.SetBool("walking", DoWalk);//stand 애니메이션
         }
 
     }
@@ -126,8 +142,10 @@ public class MovingObject : MonoBehaviour{
             CoolSkill3 = 0;
         }
     }
+
+    void TouchOfDevilSpeedSet()
+    {
+        //스킬3 속도 설정
+        applyRunSpeed = speed / 2;
+    }
 }
-
-    
-
-        
