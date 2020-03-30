@@ -54,7 +54,7 @@ public class MovingObject : MonoBehaviour{
 
             vector.Set(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), transform.position.z);
 
-            animator.SetBool("walking",true);//걷는 애니메이션
+            animator.SetBool("walking",true);//walk 애니메이션
 
             if (vector.x != 0)
             {
@@ -77,7 +77,7 @@ public class MovingObject : MonoBehaviour{
 
         else
         {
-            animator.SetBool("walking", false);//서 있는 애니메이션
+            animator.SetBool("walking", false);//stand 애니메이션
         }
 
     }
