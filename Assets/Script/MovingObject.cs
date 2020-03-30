@@ -27,6 +27,7 @@ public class MovingObject : MonoBehaviour{
     private Animator animator;
 
     public bool DoWalk;
+    public bool SendDoSkill3;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +40,7 @@ public class MovingObject : MonoBehaviour{
         SetOnSkill3Time = 3;
         DoSkill3 = false;
         CoolOnSkill3 = false;
+        SendDoSkill3 = false;
 
         animator = GetComponent<Animator>();
     }
@@ -48,7 +50,8 @@ public class MovingObject : MonoBehaviour{
     {
 
 
-
+    animator.SetBool("walking", DoWalk);//walk 애니메이션
+    animator.SetBool("skill3", SendDoSkill3);//스킬3 에니메이션
 
         //스킬3실행
         if (Input.GetKey(KeyCode.C))
@@ -66,7 +69,7 @@ public class MovingObject : MonoBehaviour{
 
             vector.Set(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), transform.position.z);
 
-            animator.SetBool("walking", DoWalk);//walk 애니메이션
+            
 
             if (vector.x != 0)
             {
@@ -93,7 +96,6 @@ public class MovingObject : MonoBehaviour{
         else
         {
             DoWalk = false;
-            animator.SetBool("walking", DoWalk);//stand 애니메이션
         }
 
     }
@@ -107,6 +109,7 @@ public class MovingObject : MonoBehaviour{
             CoolOnSkill3 = true;//스킬3 지속 off
             OnSkill3Time = SetOnSkill3Time;//스킬3 지속시간 설정
             applyRunSpeed = runSpeed;//뛰는거 적용
+            SendDoSkill3 = true;
         }
     }
 
@@ -117,6 +120,7 @@ public class MovingObject : MonoBehaviour{
         if (DoSkill3 == true)
         {
             OnSkill3Time -= Time.deltaTime;
+            animator.SetBool("skill3", SendDoSkill3);
         }
         else
         {
@@ -128,6 +132,7 @@ public class MovingObject : MonoBehaviour{
         {
             DoSkill3 = false;
             OnSkill3Time = 0;
+            SendDoSkill3 = false;
         }
 
         //스킬3 쿨타임 설정

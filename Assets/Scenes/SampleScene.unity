@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e048bfa0050e5f43ba0453ee2524999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.5
+  speed: 1
   runSpeed: 0.25
   CoolSkill3: 0
   DoSkill3: 0
@@ -244,6 +244,8 @@ MonoBehaviour:
   OnSkill3Time: 0
   SetOnSkill3Time: 0
   SendScaleX: 0
+  DoWalk: 0
+  SendDoSkill3: 0
 --- !u!212 &863753775
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -355,8 +357,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 953198876}
   m_LocalRotation: {x: -0.026176924, y: 0, z: 0, w: 0.99965733}
-  m_LocalPosition: {x: 0.58, y: 0.14, z: -0.3}
-  m_LocalScale: {x: 1.291521, y: 1.0459832, z: 0.77507746}
+  m_LocalPosition: {x: 0.46, y: 0.046, z: -0}
+  m_LocalScale: {x: 1.0259031, y: 0.84107506, z: 0.77507746}
   m_Children: []
   m_Father: {fileID: 863753776}
   m_RootOrder: 0
