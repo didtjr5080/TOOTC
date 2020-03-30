@@ -44,45 +44,10 @@ public class MovingObject : MonoBehaviour{
         //스킬3실행
         if (Input.GetKey(KeyCode.C))
         {
-            if (CoolOnSkill3 == false)//스킬3 실행
-            {
-                CoolSkill3 = Skill3SetCool;//스킬3 쿨 설정
-                DoSkill3 = true;//스킬3 지속 on
-                CoolOnSkill3 = true;//스킬3 지속 off
-                OnSkill3Time = SetOnSkill3Time;//스킬3 지속시간 설정
-                applyRunSpeed = runSpeed;//뛰는거 적용
-            }
-            
+            TouchOfDevil();
         }
 
-        //스킬 3 지속 시간 설정
-        if (DoSkill3 == true)
-        {
-            OnSkill3Time -= Time.deltaTime;
-        }
-        else
-        {
-            
-            applyRunSpeed = 0;
-        }
-
-        if (OnSkill3Time <= 0)
-        {
-            DoSkill3 = false;
-            OnSkill3Time = 0;
-        }
-
-        //스킬3 쿨타임 설정
-        if (CoolOnSkill3 == true)
-        {
-            CoolSkill3 -= Time.deltaTime;
-        }
-
-        if (CoolSkill3 <= 0)
-        {
-            CoolOnSkill3 = false;
-            CoolSkill3 = 0;
-        }
+        TouchOfDevilCool();//스킬3 쿨타임, 지속시간
 
         //이동 부분
         if (Input.GetAxisRaw("Horizontal") !=0 || Input.GetAxisRaw("Vertical") !=0 ){
@@ -117,4 +82,52 @@ public class MovingObject : MonoBehaviour{
 
     }
 
+    void TouchOfDevil()//스킬3 함수
+    {
+        if (CoolOnSkill3 == false)//스킬3 실행
+        {
+            CoolSkill3 = Skill3SetCool;//스킬3 쿨 설정
+            DoSkill3 = true;//스킬3 지속 on
+            CoolOnSkill3 = true;//스킬3 지속 off
+            OnSkill3Time = SetOnSkill3Time;//스킬3 지속시간 설정
+            applyRunSpeed = runSpeed;//뛰는거 적용
+        }
+    }
+
+    void TouchOfDevilCool()
+    {
+
+        //스킬 3 지속 시간 설정
+        if (DoSkill3 == true)
+        {
+            OnSkill3Time -= Time.deltaTime;
+        }
+        else
+        {
+
+            applyRunSpeed = 0;
+        }
+
+        if (OnSkill3Time <= 0)
+        {
+            DoSkill3 = false;
+            OnSkill3Time = 0;
+        }
+
+        //스킬3 쿨타임 설정
+        if (CoolOnSkill3 == true)
+        {
+            CoolSkill3 -= Time.deltaTime;
+        }
+
+        if (CoolSkill3 <= 0)
+        {
+            CoolOnSkill3 = false;
+            CoolSkill3 = 0;
+        }
+    }
 }
+
+    
+
+        
